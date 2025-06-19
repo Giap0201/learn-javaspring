@@ -1,6 +1,8 @@
 package com.javaweb.api;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.javaweb.model.BuildingDTO;
+import com.javaweb.model.BuildingResponseDTO;
+import com.javaweb.model.BuildingSearchDTO;
 import com.javaweb.service.BuildingService;
 
 @RestController
 public class BuildingAPI {
+	
+	@GetMapping(value = "/api/buildings/")
+	public List<BuildingResponseDTO> getBuildings(@RequestParam Map<Object,Object> pargam) {
+		List<BuildingResponseDTO> buildingResults = new ArrayList<BuildingResponseDTO>();
+		
+		
+		return buildingResults;
+	}
 	// @RequestMapping(value = "/api/building/", method = RequestMethod.GET)
 	// public void getBuilding(@RequestParam(value = "name", required = false)
 	// String name,
@@ -114,10 +126,10 @@ public class BuildingAPI {
 //	}
 	@Autowired
 	private BuildingService buildingService;
-
-	@PostMapping(value = "/api/building/")
-	public List<BuildingDTO> getAllBuilding(@RequestBody BuildingDTO buildingDTO) {
-		List<BuildingDTO> result = buildingService.getAll();
+	
+	@PostMapping(value = "/api/buildings")
+	public List<BuildingResponseDTO> getAllBuilding(@RequestBody BuildingSearchDTO buildingSearchDTO){
+		List<BuildingResponseDTO> result = buildingService.getAll();
 		return result;
 	}
 
@@ -133,6 +145,8 @@ public class BuildingAPI {
 			@RequestParam(value = "ward", required = false) String ward) {
 		System.out.println("OK");
 	}
+	
+	
 
 	// test loi chia cho 0
 	// @PostMapping(value = "/api/buildings/")
@@ -140,5 +154,6 @@ public class BuildingAPI {
 	// System.out.println(5/0);
 	// return null;
 	// }
+	//
 
 }
